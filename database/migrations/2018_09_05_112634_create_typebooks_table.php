@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrateTypebooksTable extends Migration
+class CreateTypebooksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CrateTypebooksTable extends Migration
      */
     public function up()
     {
-        Schema::create('typebooks',function (Blueprint $table){
-            $table->increments('id'); //รหัสหนังสือ
+       Schema::create('typebooks', function (Blueprint $table) {
+            $table->increments('id'); //รหัสประเภทหนังสือ
             $table->string('name'); //รายละเอียดประเภทหนังสือ
             $table->timestamps();
-                    
-        });
-        //
+        });        
     }
 
     /**
@@ -29,7 +27,6 @@ class CrateTypebooksTable extends Migration
      */
     public function down()
     {
-        Schema::droplfExists('typebooks');
-        
+        Schema::dropIfExists('typebooks');
     }
 }

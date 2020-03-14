@@ -13,11 +13,11 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-    <link href="{{asset('css/lity.min.css')}}" rel="stylesheet">
-
+    <link href="{{  asset('css/lity.min.css')  }}" rel="stylesheet">
+        
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -43,22 +43,20 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('books') }}">{{ __('หนังสือ') }}</a>
+                                    <a class="nav-link" href="{{ route('books') }}">หนังสือ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('typebooks') }}">{{ __('ประเภทหนังสือ') }}</a>
+                                <a class="nav-link" href="{{ route('typebooks') }}">ประเภทหนังสือ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('about') }}">{{ __('เกี่ยวกับเรา') }}</a>
+                                <a class="nav-link" href="{{ route('about') }}">เกี่ยวกับเรา</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('เข้าระบบ') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">เข้าระบบ</a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('ลงทะเทียน') }}</a>
-                                </li>
-                            @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">ลงทะเบียน</a>
+                            </li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -87,12 +85,13 @@
             @yield('content')
         </main>
     </div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="{{ asset('js/lity.min.js')}}"></script>
-
+    <script src="{{ asset('js/lity.min.js') }}"></script>
+    
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-
-    @yield('footer');
+    
+    @yield('footer')
+    
 </body>
 </html>

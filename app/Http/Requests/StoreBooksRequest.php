@@ -13,7 +13,7 @@ class StoreBooksRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;  // หากกำหนดเป็น false จะต้องล็อกอินก่อน
+        return true; //หากกำหนดเป็น false จะต้องล็อกอินก่อน 
     }
 
     /**
@@ -30,13 +30,14 @@ class StoreBooksRequest extends FormRequest
             'image' => 'mimes:jpeg,jpg,png',
         ];
     }
-
-    public function messages(){
-        return [
-            'title.required' => 'กรุณากรอกชื่อหนังสือ',
-            'price.required' => 'กรุณากรอกราคา',
-            'typebooks_id.required' => 'กรุณาเลือกหมวดหนังสือ',
-            'image.mimes' => 'กรุณาเลือกไฟล์ภาพนามสกุล jpeg,jpg,png',
-        ];
+    
+    public function messages() {
+            return [
+                   'title.required' => 'กรุณากรอกชื่อหนังสือ',
+                   'price.required' => 'กรุณากรอกราคา',
+                   'typebooks_id.required' => 'กรุณาเลือกหมวดหนังสือ',
+                   'image.mimes' => 'กรุณาเลือกไฟล์ภาพนามสกุล jpeg,jpg,png',
+            ];
     }
+
 }
