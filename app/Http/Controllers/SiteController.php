@@ -8,7 +8,7 @@ class SiteController extends Controller
 {
     public function index(){
         $fullname = "Pongpoompan Natawan";
-        $website = "Google.com";
+        $website = "Google.co.th";
         return view('about',[
             'fullname' => $fullname,
             'website' => $website
