@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class TypeBooks extends Model
 {
-    protected $table = 'typebooks';
+    protected $table = 'typebooks'; //กำหนดชื่อตารางให้ตรงกับฐานข้อมูล
     
-    public function books(){
-        return $this->hasMany(Books::class);
+    public function books() {
+        return $this->hasMany(Books::class); //กำหนดความสัมพันธ์รูปแบบ One To Many ไปยังตาราง books
     }
+
 }
+

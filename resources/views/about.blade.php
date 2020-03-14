@@ -6,10 +6,8 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">เกี่ยวกับเรา</div>
-                
+
                 <div class="card-body">
-                    <h3>{{ $fullname }}</h3>
-                    <p>{{ $website }}</p>
                     
                 </div>
             </div>
@@ -17,7 +15,13 @@
     </div>
 </div>
 @endsection
-@section('footers')
-<script>
-    alert("Hello,About Page");
-</script>
+
+@section('footer') 
+
+ <script>
+        alert("Hello, About Page");
+ </script>
+
+@endsection
+
+

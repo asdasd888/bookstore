@@ -6,13 +6,9 @@ use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
-    public function index(){
-        $fullname = "Pongpoompan Natawan";
-        $website = "Google.co.th";
-        return view('about',[
-            'fullname' => $fullname,
-            'website' => $website
-        ]);
+    public function index() {
+        $companyName = "Pongpoompan Natawan ComputerScience";
+
+        return view('about',[ 'companyName' => $companyName ]);
     }
-    
 }

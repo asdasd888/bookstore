@@ -3,27 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Books; //อย่าลืม use model เข้ามาใช้งาน
+use App\Books;
 use App\Http\Requests\StoreBooksRequest;
-use Image;//เรียกใช้ library จัดการรูปภาพเข้ามาใช้งาน
+use Image; //เรียกใช้ library จัดการรูปภาพเข้ามาใช้งาน
 use File;
 
-class BooksController extends Controller
-{
-    public function __construct()
-    {
-            $this->middleware('auth',['except'=>['index']]);
-            //$this->middleware('auth',['except'=>['index','create','store']]);
+class BooksController extends Controller {
 
-
+    public function __construct() {
+         // $this->middleware('auth', ['except' => ['index']]);
+         //$this->middleware('auth', ['except' => ['index', 'create', 'store']]);
     }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $books = Books::with('typebooks')->orderBy('id', 'desc')->paginate(5);
         return view('books/index', ['books' => $books]);
     }
@@ -33,8 +30,7 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         return view('books.create');
     }
 
@@ -44,25 +40,25 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBooksRequest $request)
-    {
+    public function store(StoreBooksRequest $request) {
         $book = new Books();
         $book->title = $request->title;
         $book->price = $request->price;
         $book->typebooks_id = $request->typebooks_id;
 
-        if($request->hasFile('image')){
-            $filename = str_random(10).'.'.$request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move(public_path().'/images/', $filename);
-            Image::make(public_path().'/images/'.$filename)->resize(75, 75)->save(public_path(). '/images/resize/'. $filename);
+        if ($request->hasFile('image')) {
+            $filename = str_random(10) . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path() . '/images/', $filename);
+            Image::make(public_path() . '/images/' . $filename)->resize(50, 50)->save(public_path() . '/images/resize/' . $filename);
             $book->image = $filename;
-        }else{
-            $book->image = 'nopic.png';
+        } else {
+            $book->image = 'nopic.jpg';
         }
-        $book->save();
 
-        $request->session()->flash('status','บันทึกข้อมูลเรียบร้อยแล้ว');
-        //กำหนดkeyของ flash data ชื่อว่า status โดยใส่ค่าข้อมูลคำว่า บันทึกข้อมูลเรียบร้อยเเล้ว
+        $book->save();
+        
+        $request->session()->flash('status', 'บันทึกข้อมูลเรียบร้อยแล้ว');
+	 //กำหนด key ของ flash data ชื่อว่า status โดยใส่ค่าข้อมูลคำว่า บันทึกข้อมูลเรียบร้อยแล้ว
 
         return redirect()->action('BooksController@index');
     }
@@ -73,8 +69,7 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -84,12 +79,9 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function edit($id)
-    {
-        //
+    public function edit($id) {
         $book = Books::findOrFail($id);
-        return view('books.edit',['book'=>$book]);
+        return view('books.edit', ['book' => $book]);
     }
 
     /**
@@ -99,29 +91,28 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function update(StoreBooksRequest $request, $id)
-    {
+    public function update(StoreBooksRequest $request, $id) {
         $book = Books::find($id);
         $book->title = $request->title;
         $book->price = $request->price;
         $book->typebooks_id = $request->typebooks_id;
 
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
 
-            if($book->image !='nopic.png'){
-                File::delete(public_path() . '\\images\\'.$book->image);
-                File::delete(public_path() . '\\images\\resize\\'.$book->image);
+            // delete file before update
+            if ($book->image != 'nopic.jpg') {
+                File::delete(public_path() . '\\images\\' . $book->image);
+                File::delete(public_path() . '\\images\\resize\\' . $book->image);
             }
 
-            $filename = str_random(10).'.'.$request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move(public_path().'/images/',$filename);
-            Image::make(public_path().'images'.$filename)->resize(75,75)->save(public_path().'/images/resize/'.$filename);
-            $book->image = $filename ;
-
+            $filename = str_random(10) . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path() . '/images/', $filename);
+            Image::make(public_path() . '/images/' . $filename)->resize(50, 50)->save(public_path() . '/images/resize/' . $filename);
+            $book->image = $filename;
         }
 
         $book->save();
+
         return redirect()->action('BooksController@index');
     }
 
@@ -131,14 +122,14 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $book = Books::find($id);
-        if($book->image !='nopic.png'){
-            File::delete(public_path().'\\images\\'.$book->image);
-            File::delete(public_path().'\\images\\resize\\'.$book->image);
+        if ($book->image != 'nopic.jpg') {
+            File::delete(public_path() . '\\images\\' . $book->image);
+            File::delete(public_path() . '\\images\\resize\\' . $book->image);
         }
         $book->delete();
         return redirect()->action('BooksController@index');
     }
+
 }
