@@ -19,7 +19,7 @@
 @section('footer') 
 
  <script>
-        alert("Hello, About Page");
+        alert("Pongpoompan Natawan, Computer Science");
  </script>
 
 @endsection
